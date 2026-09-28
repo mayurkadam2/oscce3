@@ -1,56 +1,36 @@
 #include <stdio.h>
 
-#define P 4
-#define R 3
+#define P 4   // Number of processes
+#define R 3   // Number of resource types
 
 int main()
 {
-    int allocation[P][R];
-    int request[P][R];
-    int available[R];
+    // Allocation Matrix
+    int allocation[P][R] = {
+        {1, 0, 1},
+        {1, 1, 0},
+        {0, 1, 1},
+        {0, 0, 0}
+    };
+
+    // Request Matrix
+    int request[P][R] = {
+        {0, 1, 0},
+        {0, 0, 1},
+        {1, 0, 0},
+        {0, 0, 0}
+    };
+
+    // Available Resources
+    int available[R] = {0, 0, 0};
+
     int work[R];
-    int finish[P];
-
-    // Input Allocation Matrix
-    printf("Enter Allocation Matrix (%d x %d):\n", P, R);
-
-    for (int i = 0; i < P; i++)
-    {
-        for (int j = 0; j < R; j++)
-        {
-            scanf("%d", &allocation[i][j]);
-        }
-    }
-
-    // Input Request Matrix
-    printf("\nEnter Request Matrix (%d x %d):\n", P, R);
-
-    for (int i = 0; i < P; i++)
-    {
-        for (int j = 0; j < R; j++)
-        {
-            scanf("%d", &request[i][j]);
-        }
-    }
-
-    // Input Available Vector
-    printf("\nEnter Available Resources:\n");
-
-    for (int j = 0; j < R; j++)
-    {
-        scanf("%d", &available[j]);
-    }
+    int finish[P] = {0, 0, 0, 0};
 
     // Work = Available
     for (int j = 0; j < R; j++)
     {
         work[j] = available[j];
-    }
-
-    // Initially no process has finished
-    for (int i = 0; i < P; i++)
-    {
-        finish[i] = 0;
     }
 
     // Deadlock Detection Algorithm
@@ -62,13 +42,12 @@ int main()
 
         for (int i = 0; i < P; i++)
         {
-            // Skip if process has already finished
             if (finish[i] == 1)
                 continue;
 
-            // Check whether Request[i] <= Work
             int canFinish = 1;
 
+            // Check Request[i] <= Work
             for (int j = 0; j < R; j++)
             {
                 if (request[i][j] > work[j])
@@ -81,25 +60,23 @@ int main()
             // If process can finish
             if (canFinish)
             {
-                printf("\nP%d can finish.", i);
+                finish[i] = 1;
+                found = 1;
 
-                // Release its allocated resources
+                // Release allocated resources
                 for (int j = 0; j < R; j++)
                 {
                     work[j] += allocation[i][j];
                 }
-
-                finish[i] = 1;
-                found = 1;
             }
         }
 
     } while (found);
 
-    // Check for deadlocked processes
+    // Display deadlocked processes
     int deadlock = 0;
 
-    printf("\n\nDeadlocked Processes: ");
+    printf("Deadlocked Processes: ");
 
     for (int i = 0; i < P; i++)
     {
@@ -112,13 +89,14 @@ int main()
 
     if (deadlock)
     {
-        printf("\n\nDeadlock exists.");
+        printf("\nDeadlock exists.\n");
     }
     else
     {
-        printf("None");
-        printf("\n\nNo deadlock exists.");
+        printf("None\n");
+        printf("No deadlock exists.\n");
     }
 
     return 0;
 }
+
