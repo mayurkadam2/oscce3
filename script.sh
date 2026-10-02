@@ -8,24 +8,18 @@ cat <<'EOF'
 EOF
 
 cat <<'EOF'
-                                                                                                 
-    _______
-   /      /,
-  /      //   PROGRAMM OUTPUT
- /______//
-(______(/
-                                                      
+  PROGRAMM OUTPUT                                           
 EOF
 
-echo "Program 1 Producer-Consumer Problem"
+echo "\nProgram 1 Producer-Consumer Problem\n"
 gcc -o run producer_consumer.c
 ./run
 
-echo "Program 2Deadlock Detection Algorithm"
+echo "\nProgram 2 Deadlock Detection Algorithm\n"
 gcc -o run deadlock_detection.c
 ./run
 
-echo "Program 3 Synchronization and Deadlocak"
+echo "\nProgram 3 Synchronization and Deadlock\n"
 gcc -o run synchronization_deadlock.c
 ./run
 
