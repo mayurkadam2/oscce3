@@ -1,30 +1,51 @@
-cat <<'EOF'
-\|/          (__)    
-     `\------(oo)
-       ||    (__)
-       ||w--||     \|/
-   \|/
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
 
-EOF
+echo "==============================================================="
 
 cat <<'EOF'
   PROGRAMM OUTPUT                                           
 EOF
 
-echo "\nProgram 1 Producer-Consumer Problem\n"
+echo "================================================================"
+
+echo "================================================================"
+
+echo "Program 1 Producer-Consumer Problem"
+
+echo "================================================================\n"
 gcc -o run producer_consumer.c
 ./run
 
-echo "\nProgram 2 Deadlock Detection Algorithm\n"
+
+echo "============================================================="
+
+echo "Program 2 Deadlock Detection Algorithm"
+
+echo "=============================================================="
 gcc -o run deadlock_detection.c
 ./run
 
-echo "\nProgram 3 Synchronization and Deadlock\n"
+echo ""
+echo ""
+echo "Program 3 Synchronization and Deadlock"
 gcc -o run synchronization_deadlock.c
 ./run
 
 cat <<'EOF'
-                                                                                                 
+
+
+
+
+
+
+
+
+
+
    -           __
  --          ~( @\   \
 ---   _________]_[__/_>________
